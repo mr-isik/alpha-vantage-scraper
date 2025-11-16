@@ -1,6 +1,6 @@
 # Alpha Vantage Scraper
 
-Bu, Alpha Vantage API'sinden veri çekmek ve CSV dosyası olarak kaydetmek için Go ile yazılmış bir CLI uygulamasıdır. Hem hisse senedi piyasası verilerini hem de haberleri çekebilirsiniz.
+Bu, Alpha Vantage API'sinden veri çekmek ve CSV dosyası olarak kaydetmek için Go ile yazılmış bir CLI (Komut Satırı Arayüzü) uygulamasıdır. Hem hisse senedi piyasası verilerini hem de haberleri çekebilirsiniz.
 
 ## Özellikler
 
@@ -10,18 +10,18 @@ Bu, Alpha Vantage API'sinden veri çekmek ve CSV dosyası olarak kaydetmek için
 - Çıktıyı CSV dosyası olarak kaydetme
 - `.env` dosyası üzerinden API anahtarı yönetimi
 
-## Kurulum
+## Kurulum (Windows İçin)
 
 1.  **Depoyu klonlayın:**
 
-    ```bash
+    ```powershell
     git clone https://github.com/mr-isik/alpha-vantage-scraper.git
     cd alpha-vantage-scraper
     ```
 
 2.  **Bağımlılıkları yükleyin:**
 
-    ```bash
+    ```powershell
     go mod tidy
     ```
 
@@ -36,16 +36,17 @@ Bu, Alpha Vantage API'sinden veri çekmek ve CSV dosyası olarak kaydetmek için
     Ücretsiz bir API anahtarını [Alpha Vantage web sitesinden](https://www.alphavantage.co/support/#api-key) alabilirsiniz.
 
 4.  **Uygulamayı derleyin:**
+    Uygulamayı çalıştırılabilir bir `.exe` dosyası haline getirin.
 
-    ```bash
-    go build -o av-scraper
+    ```powershell
+    go build -o av-scraper.exe
     ```
 
-## Detaylı Kullanım Rehberi
+## Detaylı Kullanım Rehberi (Windows İçin)
 
-Bu uygulama, `stocks` (hisse senetleri) ve `news` (haberler) olmak üzere iki ana komut üzerinden çalışır. Her komut, Alpha Vantage API'sinden farklı türde veriler çekmek için özelleştirilmiş bayraklara sahiptir.
+**Önemli Not:** Bu bir komut satırı uygulamasıdır. `av-scraper.exe` dosyasına çift tıklayarak **çalıştırılamaz**. Komutları, projenin bulunduğu klasörde açtığınız bir terminal (PowerShell veya Komut İstemi) üzerinden çalıştırmanız gerekir.
 
-Komutları çalıştırmadan önce uygulamayı `go build -o av-scraper` komutu ile derlediğinizden emin olun. Windows'ta `./av-scraper.exe`, Linux ve macOS'ta ise `./av-scraper` komutunu kullanabilirsiniz.
+Uygulama, `stocks` (hisse senetleri) ve `news` (haberler) olmak üzere iki ana komut üzerinden çalışır.
 
 ---
 
@@ -55,8 +56,8 @@ Bu komut, belirli bir hisse senedi için günlük zaman serisi verilerini (açı
 
 **Komut Yapısı:**
 
-```bash
-./av-scraper stocks --symbol=<SEMBOL> [diğer bayraklar]
+```powershell
+./av-scraper.exe stocks --symbol=<SEMBOL> [diğer bayraklar]
 ```
 
 **Bayraklar (Flags):**
@@ -73,28 +74,28 @@ Bu komut, belirli bir hisse senedi için günlük zaman serisi verilerini (açı
 - **Tüm Geçmiş Verileri Çekme:**
   Microsoft (`MSFT`) için mevcut olan tüm geçmiş verileri çeker ve varsayılan olarak `output.csv` dosyasına kaydeder.
 
-  ```bash
-  ./av-scraper stocks --symbol=MSFT
+  ```powershell
+  ./av-scraper.exe stocks --symbol=MSFT
   ```
 
 - **Belirli Bir Tarih Aralığı İçin Veri Çekme:**
   Apple (`AAPL`) için 1 Haziran 2023 ile 30 Haziran 2023 arasındaki verileri çeker.
 
-  ```bash
-  ./av-scraper stocks --symbol=AAPL --start-date=2023-06-01 --end-date=2023-06-30
+  ```powershell
+  ./av-scraper.exe stocks --symbol=AAPL --start-date=2023-06-01 --end-date=2023-06-30
   ```
 
 - **Özel Çıktı Dosyası Belirleme:**
   Tesla (`TSLA`) için tüm verileri çeker ve `tesla_verileri.csv` adında bir dosyaya kaydeder.
 
-  ```bash
-  ./av-scraper stocks --symbol=TSLA --output=tesla_verileri.csv
+  ```powershell
+  ./av-scraper.exe stocks --symbol=TSLA --output=tesla_verileri.csv
   ```
 
 - **Tek Bir Günün Verisini Çekme:**
   Google (`GOOGL`) için sadece 15 Kasım 2023 tarihinin verisini almak için başlangıç ve bitiş tarihini aynı girin.
-  ```bash
-  ./av-scraper stocks --symbol=GOOGL --start-date=2023-11-15 --end-date=2023-11-15 --output=google_15kasim.csv
+  ```powershell
+  ./av-scraper.exe stocks --symbol=GOOGL --start-date=2023-11-15 --end-date=2023-11-15 --output=google_15kasim.csv
   ```
 
 ---
@@ -105,8 +106,8 @@ Bu komut, belirli hisse senetleri, konular veya genel piyasa hakkında haberleri
 
 **Komut Yapısı:**
 
-```bash
-./av-scraper news [bayraklar]
+```powershell
+./av-scraper.exe news [bayraklar]
 ```
 
 **Bayraklar (Flags):**
@@ -127,28 +128,28 @@ Bu komut, belirli hisse senetleri, konular veya genel piyasa hakkında haberleri
 - **Belirli Hisseler İçin Haber Çekme:**
   IBM ve Apple (`IBM,AAPL`) ile ilgili en son 50 haberi çeker.
 
-  ```bash
-  ./av-scraper news --tickers=IBM,AAPL
+  ```powershell
+  ./av-scraper.exe news --tickers=IBM,AAPL
   ```
 
 - **Belirli Bir Konu Hakkında Haber Çekme:**
   `blockchain` konusuyla ilgili en son 50 haberi çeker ve `blockchain_haberleri.csv` dosyasına kaydeder.
 
-  ```bash
-  ./av-scraper news --topics=blockchain --output=blockchain_haberleri.csv
+  ```powershell
+  ./av-scraper.exe news --topics=blockchain --output=blockchain_haberleri.csv
   ```
 
 - **Birden Fazla Konu ve Hisse İçin Kapsamlı Arama:**
   `mergers_and_acquisitions` (birleşme ve devralmalar) konusuyla ilgili olarak `MSFT` ve `GOOGL` hisselerini içeren haberleri arar.
 
-  ```bash
-  ./av-scraper news --tickers=MSFT,GOOGL --topics=mergers_and_acquisitions
+  ```powershell
+  ./av-scraper.exe news --tickers=MSFT,GOOGL --topics=mergers_and_acquisitions
   ```
 
 - **Zaman Aralığı ve Limit Belirterek Haber Çekme:**
   `earnings` (kazanç raporları) konusuyla ilgili, 2023'ün ilk çeyreğinde yayınlanmış en son 200 haberi çeker ve `kazanc_raporlari_2023Q1.csv` dosyasına kaydeder.
-  ```bash
-  ./av-scraper news --topics=earnings --start-date=20230101T0000 --end-date=20230331T2359 --limit=200 --output=kazanc_raporlari_2023Q1.csv
+  ```powershell
+  ./av-scraper.exe news --topics=earnings --start-date=20230101T0000 --end-date=20230331T2359 --limit=200 --output=kazanc_raporlari_2023Q1.csv
   ```
 
 ## Katkıda Bulunma
